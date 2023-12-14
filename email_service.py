@@ -1,7 +1,6 @@
 import imaplib
 import email
 from email.header import decode_header
-import webbrowser
 import os
 from emailObject import Email
 
@@ -76,25 +75,5 @@ class EmailService:
                                         # download attachment and save it
                                         open(filepath, "wb").write(part.get_payload(decode=True))
                                         filenames.append(filename)
-                    else:
-                        # extract content type of email
-                        content_type = msg.get_content_type()
-                        # get the email body
-                        body = msg.get_payload(decode=True).decode()
-                        if content_type == "text/plain":
-                            # print only text email parts
-                            pass
-                    if content_type == "text/html":
-                        # if it's HTML, create a new HTML file and open it in browser
-                        folder_name = clean(subject)
-                        if not os.path.isdir(folder_name):
-                            # make a folder for this email (named after the subject)
-                            os.mkdir(folder_name)
-                        filename = "index.html"
-                        filepath = os.path.join(folder_name, filename)
-                        # write the file
-                        open(filepath, "w").write(body)
-                        # open in the default browser
-                        webbrowser.open(filepath)
             list_of_email.append(Email(From, subject, filenames))
         return list_of_email
