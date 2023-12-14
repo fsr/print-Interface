@@ -1,6 +1,6 @@
 import subprocess
 import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
 from emailObject import Email
 from email_service import EmailService
@@ -35,5 +35,5 @@ def print_pdf(filename):
 
 
 if __name__ == '__main__':
-
+    url_for('static', filename='style.css')
     app.run()

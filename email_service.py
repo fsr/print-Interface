@@ -1,5 +1,6 @@
 import imaplib
 import email
+import shutil
 from email.header import decode_header
 import os
 from emailObject import Email
@@ -21,8 +22,8 @@ class EmailService:
         self.imap.login(self.username, self.password)
 
     def receive_new_emails(self) -> []:
+        self.clear_dir()
         list_of_email = []
-
         status, messages = self.imap.select("INBOX")
         # number of top emails to fetch
         N = 3
@@ -77,3 +78,8 @@ class EmailService:
                                         filenames.append(filename)
             list_of_email.append(Email(From, subject, filenames))
         return list_of_email
+
+
+    def clear_dir(self):
+        if os.path.exists('./files'):
+            shutil.rmtree('./files')

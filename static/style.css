@@ -1,0 +1,21 @@
+table, th, td{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    height: 50px;
+}
+th {
+    background: slategrey;
+    height: 40px;
+}
+button{
+    background: none;
+    box-shadow: none;
+    border: none;
+}
