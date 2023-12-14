@@ -19,3 +19,7 @@ button{
     box-shadow: none;
     border: none;
 }
+
+.load_buttons {
+    border: 1px black;
+}

@@ -31,7 +31,16 @@ def get_emails():
 
 
 def print_pdf(filename):
-    subprocess.Popen(['lpr', "./files/" + filename])
+    subprocess.Popen(['lpr -H tomate.local', "./files/" + filename])
+
+@app.route('/load-emails', methods=['POST'])
+def load_more_emails():
+    if request.form['load_emails'] == '5more':
+        email_service.number += 5
+    elif request.form['load_emails'] == '5less':
+        if email_service.number > 5:
+            email_service.number -= 5
+    return redirect(url_for('get_emails'))
 
 
 if __name__ == '__main__':

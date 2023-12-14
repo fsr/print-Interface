@@ -15,6 +15,7 @@ class EmailService:
     def __init__(self, username, password):
         self.username = username
         self.password = password
+        self.number = 3
         self.imap_server = "mail.ifsr.de"
         # create an IMAP4 class with SSL
         self.imap = imaplib.IMAP4_SSL(self.imap_server)
@@ -26,7 +27,7 @@ class EmailService:
         list_of_email = []
         status, messages = self.imap.select("INBOX")
         # number of top emails to fetch
-        N = 3
+        N = self.number
         # total number of emails
         messages = int(messages[0])
         for i in range(messages, messages - N, -1):
