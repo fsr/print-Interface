@@ -12,7 +12,7 @@ buildPythonPackage {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/${python.sitePackages}
-    cp -r . $out/${python.sitePackages}/trucksimulatorbot-images
+    cp -r . $out/${python.sitePackages}/
     runHook postInstall '';
 
   shellHook = "export FLASK_APP=print-interface";
