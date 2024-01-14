@@ -1,11 +1,8 @@
 import subprocess
 import os
 from flask import Flask, render_template, request, redirect, url_for
-from markupsafe import escape
-from emailObject import Email
 from email_service import EmailService
 from dotenv import load_dotenv
-import uvicorn
 
 # loading username and password from the .env file, which has to be created
 load_dotenv()
@@ -51,7 +48,6 @@ def load_more_emails():
         if email_service.number > 5:
             email_service.number -= 5
     return redirect(url_for('get_emails'))
-
 
 if __name__ == '__main__':
     url_for('static', filename='style.css')
