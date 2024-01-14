@@ -54,17 +54,8 @@ class EmailService:
                         # iterate over email parts
                         for part in msg.walk():
                             # extract content type of email
-                            content_type = part.get_content_type()
                             content_disposition = str(part.get("Content-Disposition"))
-                            try:
-                                # get the email body
-                                body = part.get_payload(decode=True).decode()
-                            except:
-                                pass
-                            if content_type == "text/plain" and "attachment" not in content_disposition:
-                                # print text/plain emails and skip attachments
-                                pass
-                            elif "attachment" in content_disposition:
+                            if "attachment" in content_disposition:
                                 # download attachment
                                 filename = part.get_filename()
                                 if filename:
