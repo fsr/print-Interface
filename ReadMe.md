@@ -16,9 +16,7 @@ PASSWORD=<password of the account>
 
 then run
 ```
-flask run --host=0.0.0.0
+gunicorn app:app -b '0.0.0.0'
 ```
-
-THIS IS CURRENTLY ONLY THE TEST SERVER.
 
 The System is also currently working without sessions, so if one user changes something, everyone can see it.
