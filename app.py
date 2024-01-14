@@ -26,7 +26,10 @@ def hello_world():  # put application's code here
 def get_emails():
     if request.method == 'POST':
         email = request.form['path']
-        double_sided = request.form['double sided']
+        try:
+            double_sided = request.form['double sided']
+        except KeyError:
+            double_sided = False
         if double_sided == 'on':
             double_sided = True
         print("Printing file " + email + "\ndouble sided: " + str(double_sided))

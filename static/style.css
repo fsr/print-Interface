@@ -15,9 +15,9 @@ th {
     height: 40px;
 }
 .load_buttons{
-    background: none;
-    box-shadow: none;
-    border: none;
+    background: lightgray;
+    box-shadow: lightblue;
+    border: slategrey;
 }
 
 .buttons {
