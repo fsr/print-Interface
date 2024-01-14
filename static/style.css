@@ -14,10 +14,14 @@ th {
     background: slategrey;
     height: 40px;
 }
-button{
+.load_buttons{
     background: none;
     box-shadow: none;
     border: none;
+}
+
+.buttons {
+    text-align: right;
 }
 
 .load_buttons {

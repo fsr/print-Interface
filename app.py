@@ -5,6 +5,7 @@ from markupsafe import escape
 from emailObject import Email
 from email_service import EmailService
 from dotenv import load_dotenv
+import uvicorn
 
 # loading username and password from the .env file, which has to be created
 load_dotenv()
@@ -25,13 +26,19 @@ def hello_world():  # put application's code here
 def get_emails():
     if request.method == 'POST':
         email = request.form['path']
-        print("Printing file " + email)
+        double_sided = request.form['double sided']
+        if double_sided == 'on':
+            double_sided = True
+        print("Printing file " + email + "\ndouble sided: " + str(double_sided))
     listOfEmails = email_service.receive_new_emails()
     return render_template('index.html', listOfEmails=listOfEmails)
 
 
-def print_pdf(filename):
-    subprocess.Popen(['lpr -H tomate.local', "./files/" + filename])
+def print_pdf(filename, double_sided):
+    if double_sided:
+        subprocess.Popen(['lpr -o sides=two-sided-long-edge -H tomate.local', "./files/" + filename])
+    else:
+        subprocess.Popen(['lpr -H tomate.local', "./files/" + filename])
 
 @app.route('/load-emails', methods=['POST'])
 def load_more_emails():
@@ -45,4 +52,3 @@ def load_more_emails():
 
 if __name__ == '__main__':
     url_for('static', filename='style.css')
-    app.run()

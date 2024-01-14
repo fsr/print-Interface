@@ -22,7 +22,7 @@ class EmailService:
         # authenticate
         self.imap.login(self.username, self.password)
 
-    def receive_new_emails(self) -> []:
+    def receive_new_emails(self) -> list:
         self.clear_dir()
         list_of_email = []
         status, messages = self.imap.select("INBOX")

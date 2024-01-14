@@ -23,7 +23,9 @@
                             <span>{{ file }}</span>
                             <form action="/emails" enctype="multipart/form-data" method="POST">
                                 <input type="hidden" name="path" value="{{ file }} ">
-                                <button type="submit">🖨️</button>
+                                <button class="submit_button" type="submit">🖨️</button>
+                                <input type="checkbox" name="double sided">
+                                <label for="double sided">Double sided</label>
                             </form>
                         </div>
                     {% endfor %}
