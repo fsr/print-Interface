@@ -13,12 +13,13 @@ create an .env file in the repo with the following variables:
 USERNAME=<the username of the account>
 PASSWORD=<password of the account>
 ```
-
+Before first startup run:
+```
+pip install -r requirements.txt
+```
 then run
 ```
-flask run --host=0.0.0.0
+gunicorn app:app -b '0.0.0.0'
 ```
-
-THIS IS CURRENTLY ONLY THE TEST SERVER.
 
 The System is also currently working without sessions, so if one user changes something, everyone can see it.
