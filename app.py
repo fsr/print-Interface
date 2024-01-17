@@ -2,12 +2,9 @@ import subprocess
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from email_service import EmailService
-from dotenv import load_dotenv
 
-# loading username and password from the .env file, which has to be created
-load_dotenv()
-username = os.getenv('USERNAME')
-password = os.getenv('PASSWORD')
+username = os.getenv('PRINT_INTERFACE_USERNAME')
+password = open(os.getenv("CREDENTIALS_DIRECTORY", default="/dev/null") + "/print_interface_password", "r").readline().strip()
 
 
 app = Flask(__name__)
