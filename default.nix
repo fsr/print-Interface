@@ -2,11 +2,12 @@
 
 buildPythonPackage {
   name = "print-interface";
-  src = ./;
+  src = ./.;
 
   propagatedBuildInputs = with python311Packages; [
     flask
-    dotenv
+    python-dotenv
+    imaplib2
   ];
 
   installPhase = ''
