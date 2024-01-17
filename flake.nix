@@ -15,6 +15,7 @@
         default = self.packages.${system}.default;
       });
 
+      nixosModules.default = import ./module.nix;
       devShells = forAllSystems (system: {
         default = pkgs.${system}.mkShellNoCC {
           packages = with pkgs.${system}; [
