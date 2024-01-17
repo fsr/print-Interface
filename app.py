@@ -29,6 +29,7 @@ def get_emails():
             double_sided = False
         if double_sided == 'on':
             double_sided = True
+        print_pdf(email, double_sided)
         print("Printing file " + email + "\ndouble sided: " + str(double_sided))
     listOfEmails = email_service.receive_new_emails()
     return render_template('index.html', listOfEmails=listOfEmails)
@@ -36,9 +37,9 @@ def get_emails():
 
 def print_pdf(filename, double_sided):
     if double_sided:
-        subprocess.Popen(['lpr -o sides=two-sided-long-edge -H tomate.local', "./files/" + filename])
+        subprocess.Popen('lpr -H tomate.local -P Kyocera_Kyocera_ECOSYS_M6630cidn_ -o sides=two-sided-long-edge ./files/' + filename)
     else:
-        subprocess.Popen(['lpr -H tomate.local', "./files/" + filename])
+        os.system('lpr -H tomate.local -P Kyocera_Kyocera_ECOSYS_M6630cidn_ ./files/' + filename)
 
 @app.route('/load-emails', methods=['POST'])
 def load_more_emails():
