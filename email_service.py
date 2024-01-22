@@ -17,10 +17,6 @@ class EmailService:
         self.password = password
         self.number = 3
         self.imap_server = "mail.ifsr.de"
-        # create an IMAP4 class with SSL
-        self.imap = imaplib.IMAP4_SSL(self.imap_server)
-        # authenticate
-        self.imap.login(self.username, self.password)
 
     def receive_new_emails(self) -> list:
         self.clear_dir()
@@ -71,7 +67,12 @@ class EmailService:
             list_of_email.append(Email(From, subject, filenames))
         return list_of_email
 
+    def login(self):
+        self.imap = imaplib.IMAP4_SSL(self.imap_server)
+        self.imap.login(self.username, self.password)
 
+    def logout(self):
+        self.imap.logout()
     def clear_dir(self):
         if os.path.exists('./files'):
             shutil.rmtree('./files')

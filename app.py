@@ -18,6 +18,7 @@ def hello_world():  # put application's code here
 
 @app.route('/emails', methods=['GET', 'POST'])
 def get_emails():
+    email_service.login()
     if request.method == 'POST':
         email = request.form['path']
         try:
@@ -29,6 +30,7 @@ def get_emails():
         print_pdf(email, double_sided)
         print("Printing file " + email + "\ndouble sided: " + str(double_sided))
     listOfEmails = email_service.receive_new_emails()
+    email_service.logout()
     return render_template('index.html', listOfEmails=listOfEmails)
 
 
