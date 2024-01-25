@@ -2,12 +2,13 @@
 
 buildPythonPackage {
   name = "print-interface";
-  src = ./.;
+  src = ./print_interface;
 
   propagatedBuildInputs = with python311Packages; [
     flask
     python-dotenv
     imaplib2
+    gunicorn
   ];
 
   installPhase = ''
@@ -16,7 +17,7 @@ buildPythonPackage {
     cp -r . $out/${python.sitePackages}/
     runHook postInstall '';
 
-  shellHook = "export FLASK_APP=print-interface";
+  shellHook = "export FLASK_APP=print_interface";
 
   format = "other";
 }

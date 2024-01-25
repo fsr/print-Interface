@@ -1,5 +1,3 @@
-# PRINT_INTERFACE_USERNAME
-# print_interface_passwort
 { lib, pkgs, config, ... }:
 with lib;
 let
@@ -40,7 +38,7 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       environment = {
-        PRINT_INTERFACE_USERNAME = cfg.discord.clientId;
+        PRINT_INTERFACE_USERNAME = cfg.smtp.username;
       };
       serviceConfig = {
         DynamicUser = true;
