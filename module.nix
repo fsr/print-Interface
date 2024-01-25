@@ -44,7 +44,7 @@ in
         DynamicUser = true;
         LoadCredential = "print_interface_password:${cfg.smtp.passwordFile}";
 
-        ExecStart = "${appEnv}/bin/gunicorn print-interface:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
+        ExecStart = "${appEnv}/bin/gunicorn print_interface:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
       };
     };
   };
