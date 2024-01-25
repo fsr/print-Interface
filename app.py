@@ -8,7 +8,6 @@ password = open(os.getenv("CREDENTIALS_DIRECTORY", default="/dev/null") + "/prin
 
 
 app = Flask(__name__)
-listOfEmails = []
 email_service = EmailService(username, password)
 
 @app.route('/')
@@ -29,9 +28,9 @@ def get_emails():
             double_sided = True
         print_pdf(email, double_sided)
         print("Printing file " + email + "\ndouble sided: " + str(double_sided))
-    listOfEmails = email_service.receive_new_emails()
+    list_of_emails = email_service.receive_new_emails()
     email_service.logout()
-    return render_template('index.html', listOfEmails=listOfEmails)
+    return render_template('index.html', listOfEmails=list_of_emails)
 
 
 def print_pdf(filename, double_sided):

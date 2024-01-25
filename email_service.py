@@ -31,16 +31,25 @@ class EmailService:
             subject = str()
             filenames = []
             # fetch the email message by ID
-            res, msg = self.imap.fetch(str(i), "(RFC822)")
+            try:
+                res, msg = self.imap.fetch(str(i), "(RFC822)")
+            except imaplib.IMAP4.error:
+                continue
             for response in msg:
                 if isinstance(response, tuple):
                     # parse a bytes email into a message object
                     msg = email.message_from_bytes(response[1])
                     # decode the email subject
-                    subject, encoding = decode_header(msg["Subject"])[0]
-                    if isinstance(subject, bytes):
-                        # if it's a bytes, decode to str
-                        subject = subject.decode(encoding)
+                    try:
+                        subject, encoding = decode_header(msg["Subject"])[0]
+                        if isinstance(subject, bytes):
+                            # if it's a bytes, decode to str
+                            try:
+                                subject = subject.decode(encoding)
+                            except TypeError:
+                                subject = ""
+                    except TypeError:
+                        subject = ""
                     # decode email sender
                     From, encoding = decode_header(msg.get("From"))[0]
                     if isinstance(From, bytes):
