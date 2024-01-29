@@ -65,7 +65,7 @@ class EmailService:
                                 filename = part.get_filename()
                                 if filename:
                                     if ".pdf" in filename:
-                                        folder_name = "./files"
+                                        folder_name = os.getcwd() + "/files"
                                         if not os.path.isdir(folder_name):
                                             # make a folder for this email (named after the subject)
                                             os.mkdir(folder_name)
@@ -82,6 +82,7 @@ class EmailService:
 
     def logout(self):
         self.imap.logout()
+
     def clear_dir(self):
-        if os.path.exists('./files'):
-            shutil.rmtree('./files')
+        if os.path.exists(os.getcwd() + '/files'):
+            shutil.rmtree(os.getcwd() + '/files')

@@ -35,9 +35,9 @@ def get_emails():
 
 def print_pdf(filename, double_sided):
     if double_sided:
-        os.system('lpr -H tomate.local -P Kyocera_Kyocera_ECOSYS_M6630cidn_ -o sides=two-sided-long-edge ./files/' + filename)
+        os.system('lpr -H tomate.local -P Kyocera_Kyocera_ECOSYS_M6630cidn_ -o sides=two-sided-long-edge ' + os.getcwd() + '/files/' + filename)
     else:
-        os.system('lpr -H tomate.local -P Kyocera_Kyocera_ECOSYS_M6630cidn_ ./files/' + filename)
+        os.system('lpr -H tomate.local -P Kyocera_Kyocera_ECOSYS_M6630cidn_ '+ os.getcwd() + '/files/' + filename)
 
 @app.route('/load-emails', methods=['POST'])
 def load_more_emails():
