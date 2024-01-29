@@ -24,6 +24,13 @@ in
       default = "print-interface";
       description = "The group under which the server runs.";
     };
+    dataDir = mkOption {
+      type = types.path;
+      default = "/var/cache/print-interface";
+      description = mdDoc ''
+        The service's working directory
+      '';
+    };
     smtp = {
       username = mkOption {
         type = types.str;
@@ -38,14 +45,6 @@ in
           File containing the SMTP password. 
         '';
       };
-      dataDir = mkOption {
-        type = types.path;
-        default = "/var/cache/print-interface";
-        description = mdDoc ''
-          The service's working directory
-        '';
-      };
-
     };
   };
 

@@ -1,4 +1,5 @@
 {
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   description = "A print interface for the iFSR at TU Dresden";
 
   outputs = { self, nixpkgs }:
