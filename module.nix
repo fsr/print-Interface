@@ -52,6 +52,13 @@ in
     systemd.tmpfiles.rules = [
       "d '${cfg.dataDir}' 0700 ${cfg.user} ${cfg.group} - -"
     ];
+    users.users.print-interface = lib.mkIf (cfg.user == "print-interface") {
+      group = cfg.group;
+      isSystemUser = true;
+    };
+    users.groups.print-interface = lib.mkIf (cfg.group == "print-interface") { };
+
+
     systemd.services.print-interface = {
       enable = true;
       after = [ "network.target" ];
