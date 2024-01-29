@@ -1,11 +1,11 @@
 { lib, pkgs, config, ... }:
 with lib;
 let
-  cfg = config.services.fsr-print-interface;
+  cfg = config.services.print-interface;
   appEnv = pkgs.python311.withPackages (p: with p; [ gunicorn (pkgs.python311Packages.callPackage ./default.nix { }) ]);
 in
 {
-  options.services.fsr-print-interface = {
+  options.services.print-interface = {
     enable = mkEnableOption "";
     listenPort = mkOption {
       type = types.port;
@@ -52,7 +52,7 @@ in
     systemd.tmpfiles.rules = [
       "d '${cfg.dataDir}' 0700 ${cfg.user} ${cfg.group} - -"
     ];
-    systemd.services.fsr-print-interface = {
+    systemd.services.print-interface = {
       enable = true;
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
