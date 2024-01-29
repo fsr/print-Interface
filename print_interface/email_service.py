@@ -62,7 +62,7 @@ class EmailService:
                             content_disposition = str(part.get("Content-Disposition"))
                             if "attachment" in content_disposition:
                                 # download attachment
-                                filename = part.get_filename()
+                                filename = part.get_filename().strip()
                                 if filename:
                                     if ".pdf" in filename:
                                         folder_name = os.getcwd() + "/files"
