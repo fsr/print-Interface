@@ -14,7 +14,7 @@ buildPythonPackage {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/${python.sitePackages}
-    cp -r . $out/${python.sitePackages}/
+    cp -r . $out/${python.sitePackages}/print_interface
     runHook postInstall '';
 
   shellHook = "export FLASK_APP=print_interface";
