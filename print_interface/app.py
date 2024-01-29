@@ -1,7 +1,7 @@
 import subprocess
 import os
 from flask import Flask, render_template, request, redirect, url_for
-from email_service import EmailService
+from print_interface.email_service import EmailService
 
 username = os.getenv('PRINT_INTERFACE_USERNAME')
 password = open(os.getenv("CREDENTIALS_DIRECTORY", default="/dev/null") + "/print_interface_password", "r").readline().strip()

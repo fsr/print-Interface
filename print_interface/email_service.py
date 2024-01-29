@@ -3,7 +3,7 @@ import email
 import shutil
 from email.header import decode_header
 import os
-from emailObject import Email
+from print_interface.emailObject import Email
 
 
 def clean(text):
