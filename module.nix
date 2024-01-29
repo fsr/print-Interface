@@ -61,6 +61,7 @@ in
 
     systemd.services.print-interface = {
       enable = true;
+      path = [ pkgs.cups ];
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       environment = {
