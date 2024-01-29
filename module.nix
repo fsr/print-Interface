@@ -61,7 +61,7 @@ in
         PRINT_INTERFACE_USERNAME = cfg.smtp.username;
       };
       serviceConfig = {
-        WorkingDirectory = cfg.dataWir;
+        WorkingDirectory = cfg.dataDir;
         DynamicUser = true;
         LoadCredential = "print_interface_password:${cfg.smtp.passwordFile}";
 
