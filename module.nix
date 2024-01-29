@@ -14,6 +14,16 @@ in
         Port the app will run on.
       '';
     };
+    user = mkOption {
+      type = types.str;
+      default = "print-interface";
+      description = "The user under which the server runs.";
+    };
+    group = mkOption {
+      type = types.str;
+      default = "print-interface";
+      description = "The group under which the server runs.";
+    };
     smtp = {
       username = mkOption {
         type = types.str;
@@ -28,11 +38,21 @@ in
           File containing the SMTP password. 
         '';
       };
+      dataDir = mkOption {
+        type = types.path;
+        default = "/var/cache/print-interface";
+        description = mdDoc ''
+          The service's working directory
+        '';
+      };
 
     };
   };
 
   config = mkIf (cfg.enable) {
+    systemd.tmpfiles.rules = [
+      "d '${cfg.dataDir}' 0700 ${cfg.user} ${cfg.group} - -"
+    ];
     systemd.services.fsr-print-interface = {
       enable = true;
       after = [ "network.target" ];
@@ -41,6 +61,7 @@ in
         PRINT_INTERFACE_USERNAME = cfg.smtp.username;
       };
       serviceConfig = {
+        WorkingDirectory = cfg.dataWir;
         DynamicUser = true;
         LoadCredential = "print_interface_password:${cfg.smtp.passwordFile}";
 
